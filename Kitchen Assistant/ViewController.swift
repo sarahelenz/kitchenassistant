@@ -7,15 +7,57 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
+    var recipeName: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nvc = segue.destination as! SecondViewController
+        let recipe = nvc.recipeName
+        let breakfastRecipe = nvc.breakfastRecipeNames
+        let lunchRecipe = nvc.lunchRecipeNames
+        let dinnerRecipe = nvc.dinnerRecipeNames
+        let dessertRecipe = nvc.dessertRecipeNames
+        let snackRecipe = nvc.snackRecipeNames
+        
+    }
+    func chooseRandomRecipe(){
+        var ref = Database.database().reference()
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            
+            for data in snapshot.children.allObjects as! [DataSnapshot] {
+                let meal = data.key
+                let dictionary = data.value as! NSDictionary
+                
+                let recipeName = dictionary as! NSDictionary
+                let recipeDetails = recipeName as Any
+            }
+        }
+    }
+      
+    
+    
+    
+    @IBAction func whenSnackRecipeButtonPressed(_ sender: Any) {
+        chooseRandomRecipe()
+    }
+    @IBAction func whenDessertRecipeButtonPressed(_ sender: Any) {
+        chooseRandomRecipe()
+    }
+    @IBAction func whenDinnerRecipeButtonPressed(_ sender: Any) {
+        chooseRandomRecipe()
+    }
+    @IBAction func whenLunchRecipeButtonPressed(_ sender: Any) {
+        chooseRandomRecipe()
+    }
+    @IBAction func whenBreakfastRecipeButtonPressed(_ sender: Any) {
+        chooseRandomRecipe()
     }
 
 }

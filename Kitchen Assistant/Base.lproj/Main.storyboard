@@ -26,26 +26,41 @@
                                 <rect key="frame" x="187" y="304" width="43" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Lunch"/>
+                                <connections>
+                                    <action selector="whenLunchRecipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LD1-3k-n4U"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huu-7e-Etp">
                                 <rect key="frame" x="185" y="367" width="45" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Dinner"/>
+                                <connections>
+                                    <action selector="whenDinnerRecipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z8c-LR-V1x"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NM2-UC-Ueo">
                                 <rect key="frame" x="181" y="447" width="54" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Dessert"/>
+                                <connections>
+                                    <action selector="whenDessertRecipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1py-bG-lpS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XnC-BN-dHd">
                                 <rect key="frame" x="187" y="530" width="42" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Snack"/>
+                                <connections>
+                                    <action selector="whenSnackRecipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SFI-YN-yos"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBy-6H-IpT">
                                 <rect key="frame" x="175" y="238" width="65" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Breakfast"/>
+                                <connections>
+                                    <action selector="whenBreakfastRecipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JlX-0j-4Lm"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdG-Uz-zlz">
                                 <rect key="frame" x="117" y="629" width="183" height="46"/>
