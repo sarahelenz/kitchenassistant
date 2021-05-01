@@ -11,7 +11,8 @@ import Firebase
 
 class ViewController: UIViewController {
 
-    var recipeName: [String] = []
+    var foodName: [Any] = []
+    var mealNames: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +34,11 @@ class ViewController: UIViewController {
             
             for data in snapshot.children.allObjects as! [DataSnapshot] {
                 let meal = data.key
-                let dictionary = data.value as! NSDictionary
+                let recipeName = data.value as! NSDictionary
+                let recipeDetails = recipeName.allKeys
                 
-                let recipeName = dictionary as! NSDictionary
-                let recipeDetails = recipeName as Any
+                self.mealNames.append(meal)
+                self.foodName.append(recipeName)
             }
         }
     }
@@ -58,6 +60,8 @@ class ViewController: UIViewController {
     }
     @IBAction func whenBreakfastRecipeButtonPressed(_ sender: Any) {
         chooseRandomRecipe()
+       
+        
     }
 
 }
