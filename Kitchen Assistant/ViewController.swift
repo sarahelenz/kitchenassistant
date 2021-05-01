@@ -11,57 +11,88 @@ import Firebase
 
 class ViewController: UIViewController {
 
-    var foodName: [Any] = []
+    var both: [Any] = []
     var mealNames: [String] = []
+    var foodName: [Any] = []
+    var foodCount:[Any] = []
+    var breakfastNames: [Any] = []
+    var lunchNames: [String] = []
+    var dinnerNames: [String] = []
+    var dessertNames: [String] = []
+    var snackNames: [String] = []
+    
+    @IBOutlet weak var yourRecipeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getFirebaseData()
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nvc = segue.destination as! SecondViewController
-        let recipe = nvc.recipeName
-        let breakfastRecipe = nvc.breakfastRecipeNames
-        let lunchRecipe = nvc.lunchRecipeNames
-        let dinnerRecipe = nvc.dinnerRecipeNames
-        let dessertRecipe = nvc.dessertRecipeNames
-        let snackRecipe = nvc.snackRecipeNames
-        
+    override func viewDidAppear(_ animated: Bool) {
+        getFirebaseData()
+        super.viewDidLoad()
+       
     }
-    func chooseRandomRecipe(){
+    
+    public func getFirebaseData(){
         var ref = Database.database().reference()
         ref.observeSingleEvent(of: .value) { (snapshot) in
             
             for data in snapshot.children.allObjects as! [DataSnapshot] {
                 let meal = data.key
-                let recipeName = data.value as! NSDictionary
-                let recipeDetails = recipeName.allKeys
+                let recipeAndDetails = data.value as! NSDictionary
+                let recipeName = recipeAndDetails.allKeys
                 
                 self.mealNames.append(meal)
-                self.foodName.append(recipeName)
+                self.foodName.append(contentsOf: recipeName)
+                self.foodCount.append(recipeName)
+               
+                
+                for meal in self.mealNames{
+                                if meal == "Breakfast"{
+                                    let breakfastCount = (self.foodCount[0] as AnyObject).count
+                                    self.breakfastNames.append(contentsOf: self.foodName[0..<breakfastCount!])
+                                }else if meal == "Lunch"{
+                                  self.lunchNames.append(meal)
+                                }else if meal == "Dinner"{
+                                  self.dinnerNames.append(meal)
+                                }else if meal == "Dessert"{
+                                  self.dessertNames.append(meal)
+                                }else if meal == "Snack"{
+                                  self.snackNames.append(meal)
+                                }
+                            }
+            //    print(self.foodName)
+            //    print(self.foodName[0...1])
+                print(recipeAndDetails)
+                print(self.breakfastNames)
+               
+                
             }
         }
+        
     }
       
     
     
     
     @IBAction func whenSnackRecipeButtonPressed(_ sender: Any) {
-        chooseRandomRecipe()
+        getFirebaseData()
     }
     @IBAction func whenDessertRecipeButtonPressed(_ sender: Any) {
-        chooseRandomRecipe()
+        getFirebaseData()
     }
     @IBAction func whenDinnerRecipeButtonPressed(_ sender: Any) {
-        chooseRandomRecipe()
+        getFirebaseData()
     }
     @IBAction func whenLunchRecipeButtonPressed(_ sender: Any) {
-        chooseRandomRecipe()
+        getFirebaseData()
     }
     @IBAction func whenBreakfastRecipeButtonPressed(_ sender: Any) {
-        chooseRandomRecipe()
-       
+            getFirebaseData()
         
+      //  print(breakfastNames)
+        var random = breakfastNames.randomElement()!
+        yourRecipeButton.setTitle("\(random)", for: .normal)
     }
 
 }

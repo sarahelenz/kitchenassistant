@@ -94,5 +94,6 @@ class SecondViewController: UIViewController, UITableViewDataSource {
         ref.child("Lunch").child(lunchRecipeNames[lunchRecipeNames.count - 1]).setValue(lunchRecipeDetails)
         self.navigationController?.popViewController(animated: true)
     }
+  
 }
 
