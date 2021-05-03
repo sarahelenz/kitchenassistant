@@ -68,6 +68,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Your recipe is..."/>
                                 <connections>
+                                    <action selector="whenRecipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q1b-hs-YV7"/>
                                     <segue destination="lpM-pP-9j3" kind="show" id="9gK-zE-i4d"/>
                                 </connections>
                             </button>
@@ -99,7 +100,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tIj-cF-gV9">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recipeCell" id="tIj-cF-gV9">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tIj-cF-gV9" id="PUB-F9-nOC">
@@ -110,6 +111,9 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" id="AfZ-t3-jc1"/>
+                    <connections>
+                        <outlet property="recipeTableView" destination="kCA-9g-OFP" id="cbR-yt-miO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GgL-Ei-M7W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
