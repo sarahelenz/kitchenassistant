@@ -7,30 +7,27 @@
 //
 
 import UIKit
+import Firebase
 
 class RecipeViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet var recipeTableView: UITableView!
     var recipeDetails: [String] = []
-    var recipeInstructions: [String] = []
-    var randomBreakfast: String = ""
-    var randomLunch: String = ""
-    var randomDinner: String = ""
-    var randomDessert: String = ""
-    var randomSnack: String = ""
-    var breakfastNames: [Any] = []
-    var lunchNames: [Any] = []
-    var dinnerNames: [Any] = []
-    var dessertNames: [Any] = []
-    var snackNames: [Any] = []
+    var recipeInstructions: [Any] = []
+    var randomRecipe: String = ""
+    var foodName: [Any] = []
+    var realFoodName: [String] = []
+    var arrayCount = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        assignRecipetoName()
         DispatchQueue.main.async {
             self.recipeTableView.reloadData()
         }
-     //   print(recipeInstructions)
+        assignChosenRecipe()
+        
+        print(randomRecipe)
         
     }
     
@@ -50,16 +47,43 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nvc2 = segue.destination as! SecondViewController
         let nvc1 = segue.destination as! ViewController
-        nvc1.breakfastNames = breakfastNames
-        nvc1.lunchNames = lunchNames
-        nvc1.dinnerNames = dinnerNames
-        nvc1.dessertNames = dessertNames
-        nvc1.snackNames = snackNames
+        nvc1.chosenRecipe = randomRecipe
     }
     
-    func assignRecipetoName(){
-        
+    func assignChosenRecipe(){
+        var ref = Database.database().reference()
+            ref.observeSingleEvent(of: .value) { (snapshot) in
+                
+                for data in snapshot.children.allObjects as! [DataSnapshot] {
+                    let meal = data.key
+                    let recipeAndDetails = data.value as! NSDictionary
+                    let recipeName = recipeAndDetails.allKeys
+                    let recipeInstructions = recipeAndDetails.allValues
+                    
+                    self.foodName.append(contentsOf: recipeName)
+               
+                    
+                    while self.arrayCount < self.foodName.count{
+                        self.realFoodName.append(self.foodName[self.arrayCount] as! String)
+                        self.arrayCount += 1
+                    }
+                    
+                    print(self.realFoodName)
+                }
+                var foodIndex: Int?
+                
+                for i in (0..<self.realFoodName.count){
+                    if self.realFoodName[i] == self.randomRecipe{
+                        foodIndex = i
+                    }
+                }
+                print(self.randomRecipe)
+                print(foodIndex)
+
+            }
+          
         }
+    
         
     
     

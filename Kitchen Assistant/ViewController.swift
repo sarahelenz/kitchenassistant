@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     var dinnerCount: Int = 0
     var dessertCount: Int = 0
     var snackCount: Int = 0
-    var chosenRecipe = ""
+    var chosenRecipe: Any = ""
 
     
     @IBOutlet weak var yourRecipeButton: UIButton!
