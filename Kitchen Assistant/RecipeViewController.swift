@@ -18,16 +18,16 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
     var foodName: [Any] = []
     var realFoodName: [String] = []
     var arrayCount = 0
-
+    var realRandomRecipe: [String] = []
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
             self.recipeTableView.reloadData()
         }
-        assignChosenRecipe()
-        
-        print(randomRecipe)
+            assignChosenRecipe()
         
     }
     
@@ -45,46 +45,37 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
         let nvc2 = segue.destination as! SecondViewController
         let nvc1 = segue.destination as! ViewController
-        nvc1.chosenRecipe = randomRecipe
+        nvc1.chosenRecipe = self.randomRecipe
     }
     
     func assignChosenRecipe(){
         var ref = Database.database().reference()
-            ref.observeSingleEvent(of: .value) { (snapshot) in
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            
+            for data in snapshot.children.allObjects as! [DataSnapshot] {
+                let meal = data.key
+                let recipeAndDetails = data.value as! NSDictionary
+                let recipeName = recipeAndDetails.allKeys
+                let recipeInstructions = recipeAndDetails.allValues
                 
-                for data in snapshot.children.allObjects as! [DataSnapshot] {
-                    let meal = data.key
-                    let recipeAndDetails = data.value as! NSDictionary
-                    let recipeName = recipeAndDetails.allKeys
-                    let recipeInstructions = recipeAndDetails.allValues
-                    
-                    self.foodName.append(contentsOf: recipeName)
-               
-                    
-                    while self.arrayCount < self.foodName.count{
-                        self.realFoodName.append(self.foodName[self.arrayCount] as! String)
-                        self.arrayCount += 1
-                    }
-                    
-                    print(self.realFoodName)
-                }
-                var foodIndex: Int?
+                self.foodName.append(contentsOf: recipeName)
                 
-                for i in (0..<self.realFoodName.count){
-                    if self.realFoodName[i] == self.randomRecipe{
-                        foodIndex = i
-                    }
+                
+                while self.arrayCount < self.foodName.count{
+                    self.realFoodName.append(self.foodName[self.arrayCount] as! String)
+                    self.arrayCount += 1
                 }
-                print(self.randomRecipe)
-                print(foodIndex)
-
             }
-          
+            print(self.realFoodName)
         }
-    
         
+    }
+   
+    
+    
     
     
 }

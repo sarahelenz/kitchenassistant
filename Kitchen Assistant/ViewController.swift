@@ -123,7 +123,7 @@ class ViewController: UIViewController {
     
     @IBAction func whenRecipeButtonPressed(_ sender: Any) {
         chosenRecipe = yourRecipeButton.currentTitle!
-        print(chosenRecipe)
+      //  print(chosenRecipe)
     }
 }
 
