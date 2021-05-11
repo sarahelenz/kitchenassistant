@@ -13,40 +13,23 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet var recipeTableView: UITableView!
     var recipeDetails: [String] = []
-    var recipeInstructions: [Any] = []
-    var randomRecipe: Any?
+    var realRecipeInstructions: [Any] = []
+    var recipeInstructions2: [Any] = []
+    var randomRecipe: String!
     var foodName: [Any] = []
     var realFoodName: [String] = []
     var arrayCount = 0
-    var arrayCount2 = 0
+    var finalInstructions: [Any] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async {
-            self.recipeTableView.reloadData()
-        }
-        print(randomRecipe!)
         assignChosenRecipe()
-        
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeInstructions.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         DispatchQueue.main.async {
             self.recipeTableView.reloadData()
         }
-        let cell2 = recipeTableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
-        cell2.textLabel?.text = "\(recipeInstructions[indexPath.row])"
-        return cell2
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nvc1 = segue.destination as! ViewController
-        print(randomRecipe)
+             print(randomRecipe!)
+      //  print(finalInstructions)
     }
     
     func assignChosenRecipe(){
@@ -60,17 +43,35 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
                 let recipeInstructions = recipeAndDetails.allValues
                 
                 self.foodName.append(contentsOf: recipeName)
+                self.realRecipeInstructions.append(contentsOf: recipeInstructions)
                 
-                
+               
                 while self.arrayCount < self.foodName.count{
                     self.realFoodName.append(self.foodName[self.arrayCount] as! String)
                     self.arrayCount += 1
                 }
+                self.recipeInstructions2.append(recipeAndDetails.value(forKey: self.randomRecipe!))
+
             }
             print(self.realFoodName)
             print(self.randomRecipe!)
-          
+            self.finalInstructions.append(contentsOf: self.recipeInstructions2)
+            
+            }
         }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+          return finalInstructions.count
+      }
+      
+      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        assignChosenRecipe()
+        DispatchQueue.main.async {
+              self.recipeTableView.reloadData()
+          }
+          let cell2 = recipeTableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
+          cell2.textLabel?.text = "\(finalInstructions[indexPath.row])"
+          return cell2
+      }
         
     }
    
@@ -78,4 +79,4 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
     
     
     
-}
+
