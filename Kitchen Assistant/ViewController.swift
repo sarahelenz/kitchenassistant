@@ -26,10 +26,11 @@ class ViewController: UIViewController {
     var dinnerCount: Int = 0
     var dessertCount: Int = 0
     var snackCount: Int = 0
-    var chosenRecipe: Any = ""
 
     
     @IBOutlet weak var yourRecipeButton: UIButton!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
     }
+    
     
    
     public func getFirebaseData(){
@@ -122,8 +124,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func whenRecipeButtonPressed(_ sender: Any) {
-        chosenRecipe = yourRecipeButton.currentTitle!
-      //  print(chosenRecipe)
+        var chosenRecipe = yourRecipeButton.currentTitle!
+        print(chosenRecipe)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        whenRecipeButtonPressed(AnyObject.self)
+        let nvc = segue.destination as! RecipeViewController
+        nvc.randomRecipe = yourRecipeButton.currentTitle
     }
 }
 

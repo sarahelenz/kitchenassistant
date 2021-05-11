@@ -14,12 +14,11 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
     @IBOutlet var recipeTableView: UITableView!
     var recipeDetails: [String] = []
     var recipeInstructions: [Any] = []
-    var randomRecipe: String = ""
+    var randomRecipe: Any?
     var foodName: [Any] = []
     var realFoodName: [String] = []
     var arrayCount = 0
-    var realRandomRecipe: [String] = []
-    
+    var arrayCount2 = 0
     
     
     override func viewDidLoad() {
@@ -27,7 +26,8 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
         DispatchQueue.main.async {
             self.recipeTableView.reloadData()
         }
-            assignChosenRecipe()
+        print(randomRecipe!)
+        assignChosenRecipe()
         
     }
     
@@ -45,10 +45,8 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-        let nvc2 = segue.destination as! SecondViewController
         let nvc1 = segue.destination as! ViewController
-        nvc1.chosenRecipe = self.randomRecipe
+        print(randomRecipe)
     }
     
     func assignChosenRecipe(){
@@ -70,6 +68,8 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
                 }
             }
             print(self.realFoodName)
+            print(self.randomRecipe!)
+          
         }
         
     }
