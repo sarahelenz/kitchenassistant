@@ -50,14 +50,15 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
                     self.realFoodName.append(self.foodName[self.arrayCount] as! String)
                     self.arrayCount += 1
                 }
-       
+       var dictCount = self.realFoodName.firstIndex(of: self.randomRecipe)!
+                  print(dictCount)
+                  self.recipeInstructions2.append(recipeAndDetails[dictCount])
+                
             }
             DispatchQueue.main.async {
                 self.recipeTableView.reloadData()
                              }
-          var dictCount = self.realFoodName.firstIndex(of: self.randomRecipe)!
-            print(dictCount)
-            self.recipeInstructions2.append(recipeAndDetails[dictCount])
+         
             print(self.recipeInstructions2)
             print(self.realFoodName)
             print(self.randomRecipe)
