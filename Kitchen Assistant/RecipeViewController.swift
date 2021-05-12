@@ -50,7 +50,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
                     self.realFoodName.append(self.foodName[self.arrayCount] as! String)
                     self.arrayCount += 1
                 }
-                self.allrecipes.updateValue("\(recipeInstructions)", forKey: "\(recipeName)")
+                self.allrecipes.updateValue("\(recipeInstructions)", forKey: "\(self.realFoodName)")
                 
             }
      
