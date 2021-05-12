@@ -43,26 +43,34 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
                 let recipeInstructions = recipeAndDetails.allValues
                 
                 self.foodName.append(contentsOf: recipeName)
-                self.realRecipeInstructions.append(recipeInstructions)
+                self.realRecipeInstructions.append(contentsOf: recipeInstructions)
            
                 
                 while self.arrayCount < self.foodName.count{
                     self.realFoodName.append(self.foodName[self.arrayCount] as! String)
                     self.arrayCount += 1
                 }
-       var dictCount = self.realFoodName.firstIndex(of: self.randomRecipe)!
-                  print(dictCount)
-                  self.recipeInstructions2.append(recipeAndDetails[dictCount])
+                self.allrecipes.updateValue("\(recipeInstructions)", forKey: "\(recipeName)")
                 
+            }
+     
+            var dictCount = self.realFoodName.firstIndex(of: self.randomRecipe)!
+            print(dictCount)
+            for recipeName in self.allrecipes.keys{
+                if recipeName == self.randomRecipe{
+                    var indexOfrecipeName = self.allrecipes.index(forKey: self.randomRecipe)
+                    self.recipeInstructions2.append(self.allrecipes[indexOfrecipeName!])
+                }
             }
             DispatchQueue.main.async {
                 self.recipeTableView.reloadData()
                              }
          
-            print(self.recipeInstructions2)
             print(self.realFoodName)
-            print(self.randomRecipe)
-            }
+            print(self.randomRecipe!)
+            print(self.recipeInstructions2)
+            
+        }
   
         }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
