@@ -50,22 +50,16 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
                     self.realFoodName.append(self.foodName[self.arrayCount] as! String)
                     self.arrayCount += 1
                 }
-                self.allrecipes.updateValue("\(recipeInstructions)", forKey: "\(self.realFoodName)")
                 
             }
      
             var dictCount = self.realFoodName.firstIndex(of: self.randomRecipe)!
             print(dictCount)
-            for recipeName in self.allrecipes.keys{
-                if recipeName == self.randomRecipe{
-                    var indexOfrecipeName = self.allrecipes.index(forKey: self.randomRecipe)
-                    self.recipeInstructions2.append(self.allrecipes[indexOfrecipeName!])
-                }
-            }
+            self.recipeInstructions2.append(self.realRecipeInstructions[dictCount + 1])
             DispatchQueue.main.async {
                 self.recipeTableView.reloadData()
                              }
-         
+            self.finalInstructions.append(contentsOf: self.recipeInstructions2[0] as! NSArray)
             print(self.realFoodName)
             print(self.randomRecipe!)
             print(self.recipeInstructions2)
@@ -74,13 +68,13 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
   
         }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          return recipeInstructions2.count
+          return finalInstructions.count
       }
       
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      
           let cell2 = recipeTableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
-          cell2.textLabel?.text = "\(recipeInstructions2[indexPath.row])"
+          cell2.textLabel?.text = "\(finalInstructions[indexPath.row])"
           return cell2
       }
         

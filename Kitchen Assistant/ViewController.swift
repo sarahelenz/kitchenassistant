@@ -132,6 +132,7 @@ class ViewController: UIViewController {
         whenRecipeButtonPressed(AnyObject.self)
         let nvc = segue.destination as! RecipeViewController
         nvc.randomRecipe = yourRecipeButton.currentTitle
+        nvc.realRecipeInstructions.append(self.recipeDetails)
     }
 }
 
