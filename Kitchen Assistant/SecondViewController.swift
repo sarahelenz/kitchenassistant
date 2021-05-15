@@ -82,7 +82,6 @@ class SecondViewController: UIViewController, UITableViewDataSource {
         breakfastRecipeDetails.append(contentsOf: recipeInstructions)
         var ref = Database.database().reference()
         ref.child("Breakfast").child(breakfastRecipeNames[breakfastRecipeNames.count - 1]).setValue(breakfastRecipeDetails)
-        print(breakfastRecipeNames.count)
         self.navigationController?.popViewController(animated: true)
         
     }
@@ -94,6 +93,7 @@ class SecondViewController: UIViewController, UITableViewDataSource {
         ref.child("Lunch").child(lunchRecipeNames[lunchRecipeNames.count - 1]).setValue(lunchRecipeDetails)
         self.navigationController?.popViewController(animated: true)
     }
+    
   
 }
 

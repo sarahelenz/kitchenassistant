@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         getFirebaseData()
     }
     override func viewDidAppear(_ animated: Bool) {
+        
         getFirebaseData()
         super.viewDidLoad()
         
@@ -130,9 +131,10 @@ class ViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         whenRecipeButtonPressed(AnyObject.self)
-        let nvc = segue.destination as! RecipeViewController
-        nvc.randomRecipe = yourRecipeButton.currentTitle
-        nvc.realRecipeInstructions.append(self.recipeDetails)
+        let nvc = segue.destination as? RecipeViewController
+        let nvc2 = segue.destination as? SecondViewController
+        nvc?.randomRecipe = yourRecipeButton.currentTitle
+        nvc?.realRecipeInstructions.append(self.recipeDetails)
     }
 }
 
